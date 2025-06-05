@@ -1,0 +1,25 @@
+@startuml
+title Diagrama de Estados – Proceso de Compra de Vino
+
+[*] --> InicioSesion : Usuario accede al sistema
+
+InicioSesion --> NavegandoCatalogo : Inicio exitoso
+NavegandoCatalogo --> ViendoDetalle : Selecciona un vino
+ViendoDetalle --> NavegandoCatalogo : Regresa al catálogo
+ViendoDetalle --> AgregandoAlCarrito : Añadir al carrito
+AgregandoAlCarrito --> ConfirmandoCarrito : Revisa su carrito
+ConfirmandoCarrito --> IniciandoPago : Confirma compra
+
+state IniciandoPago {
+  [*] --> SeleccionandoMetodo : Elige método de pago
+  SeleccionandoMetodo --> IngresandoDatos : Ingresa datos tarjeta
+  IngresandoDatos --> ProcesandoPago : Envía datos
+  ProcesandoPago --> PagoExitoso : Verificación ok
+  ProcesandoPago --> PagoFallido : Verificación falla
+  PagoFallido --> SeleccionandoMetodo : Reintentar
+}
+
+PagoExitoso --> PedidoConfirmado : Se confirma pedido
+PedidoConfirmado --> [*] : Fin del proceso de compra
+
+@enduml
