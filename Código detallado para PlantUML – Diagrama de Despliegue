@@ -1,0 +1,62 @@
+@startuml
+' Título del diagrama
+title Diagrama de Despliegue - Sistema Vinatería
+
+' NODO: Cliente (navegador o app móvil)
+node "Cliente Web o Móvil" as cliente {
+  artifact "App Cliente (HTML/JS o APK)"
+  [Interfaz de Usuario]
+}
+
+' NODO: Servidor Web (Frontend)
+node "Servidor Web (Frontend)" as servidor_frontend {
+  artifact "index.html"
+  artifact "app.js"
+  artifact "style.css"
+  [Componente UI]
+}
+
+' NODO: Servidor de Aplicaciones (Backend)
+node "Servidor Backend (API + lógica de negocio)" as servidor_backend {
+  artifact "backend.jar"
+  [Módulo Catálogo]
+  [Módulo Carrito]
+  [Módulo Compras]
+  [Módulo Usuarios]
+  [Módulo Favoritos]
+  [Módulo Entregas]
+  [Módulo Notificaciones]
+}
+
+' NODO: Servidor de Base de Datos
+database "Base de Datos Vinatería" as bd {
+  [Tabla Productos]
+  [Tabla Usuarios]
+  [Tabla Compras]
+  [Tabla Favoritos]
+  [Tabla Entregas]
+}
+
+' Conexiones entre nodos
+cliente --> servidor_frontend : Solicitud HTTP/HTTPS
+servidor_frontend --> servidor_backend : REST API (JSON)
+servidor_backend --> bd : Conexión JDBC/MySQL
+servidor_backend --> cliente : Confirmación / Respuesta JSON
+
+' Notas para mejor comprensión
+note right of cliente
+  Cliente accede desde navegador o app
+  y visualiza el sistema
+end note
+
+note left of servidor_backend
+  Lógica del negocio y procesamiento
+  de las solicitudes desde el frontend
+end note
+
+note right of bd
+  Aquí se almacenan los datos:
+  productos, usuarios, compras, etc.
+end note
+
+@enduml
