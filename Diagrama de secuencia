@@ -1,0 +1,45 @@
+ Diagrama 1: “Compra de vino en línea”
+
+@startuml
+actor Cliente
+participant "Interfaz Web/App" as UI
+participant "Módulo Catálogo" as Cat
+participant "Módulo Carrito" as Cart
+participant "Módulo Pago" as Pago
+
+Cliente -> UI : Inicia sesión
+UI -> Cliente : Muestra pantalla principal
+
+Cliente -> UI : Busca vino
+UI -> Cat : Solicita catálogo
+Cat --> UI : Lista de vinos
+UI -> Cliente : Muestra resultados
+
+Cliente -> UI : Añade vino al carrito
+UI -> Cart : Agrega producto al carrito
+Cart --> UI : Confirmación
+UI -> Cliente : Producto agregado
+
+Cliente -> UI : Realiza pago
+UI -> Pago : Envia datos de tarjeta
+Pago --> UI : Confirmación de pago
+UI -> Cliente : Compra realizada exitosamente
+@enduml
+
+Diagrama 2: “Recepción de promociones personalizadas”
+
+@startuml
+actor Cliente
+participant "Módulo Usuarios" as Usuarios
+participant "Módulo Promociones" as Promo
+participant "Servicio de Mensajería" as Mensaje
+
+Cliente -> Usuarios : Inicia sesión
+Usuarios --> Cliente : Bienvenida personalizada
+
+Usuarios -> Promo : Solicita promociones personalizadas
+Promo --> Usuarios : Lista de promociones
+
+Usuarios -> Mensaje : Envía promociones por WhatsApp
+Mensaje --> Cliente : Mensaje recibido
+@enduml
