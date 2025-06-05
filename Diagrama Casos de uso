@@ -1,0 +1,75 @@
+@startuml
+title Diagrama de Casos de Uso – Gestión de Clientes
+
+actor Cliente
+
+rectangle "Sistema de Vinatería" {
+  usecase "Registrarse" as UC1
+  usecase "Iniciar Sesión" as UC2
+  usecase "Actualizar Perfil" as UC3
+  usecase "Consultar Historial de Pedidos" as UC4
+
+  UC1 --> UC2 : <<include>>
+  UC2 --> UC3 : <<extend>>
+  UC2 --> UC4 : <<extend>>
+}
+
+Cliente --> UC1
+Cliente --> UC2
+Cliente --> UC3
+Cliente --> UC4
+
+@enduml
+
+
+@startuml
+title Diagrama de Casos de Uso – Proceso de Compra
+
+actor Cliente
+actor SistemaPago
+
+rectangle "Sistema de Vinatería" {
+  usecase "Seleccionar Producto" as UC1
+  usecase "Agregar al Carrito" as UC2
+  usecase "Finalizar Pedido" as UC3
+  usecase "Realizar Pago" as UC4
+  usecase "Recibir Confirmación" as UC5
+
+  UC1 --> UC2 : <<include>>
+  UC2 --> UC3 : <<include>>
+  UC3 --> UC4 : <<include>>
+  UC4 --> UC5 : <<extend>>
+}
+
+Cliente --> UC1
+Cliente --> UC2
+Cliente --> UC3
+Cliente --> UC4
+Cliente --> UC5
+UC4 --> SistemaPago
+
+@enduml
+
+
+@startuml
+title Diagrama de Casos de Uso – Administración de Productos
+
+actor Administrador
+
+rectangle "Sistema de Vinatería" {
+  usecase "Agregar Producto" as UC1
+  usecase "Editar Producto" as UC2
+  usecase "Eliminar Producto" as UC3
+  usecase "Consultar Inventario" as UC4
+
+  UC1 --> UC4 : <<extend>>
+  UC2 --> UC4 : <<extend>>
+  UC3 --> UC4 : <<extend>>
+}
+
+Administrador --> UC1
+Administrador --> UC2
+Administrador --> UC3
+Administrador --> UC4
+
+@enduml
