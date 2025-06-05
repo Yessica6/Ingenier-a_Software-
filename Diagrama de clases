@@ -1,0 +1,61 @@
+@startuml
+title Diagrama de Clases – Sistema de Vinatería
+
+'===== CLASE CLIENTE =====
+class Cliente {
+  - idCliente: int
+  - nombre: String
+  - correoElectronico: String
+  - direccionEntrega: String
+  + registrarCuenta()
+  + iniciarSesion()
+  + hacerPedido()
+}
+
+'===== CLASE PRODUCTO (vino) =====
+class Producto {
+  - idProducto: int
+  - nombre: String
+  - descripcion: String
+  - precio: double
+  - stockDisponible: int
+  + consultarDisponibilidad()
+  + actualizarStock()
+}
+
+'===== CLASE CARRITO DE COMPRAS =====
+class Carrito {
+  - idCarrito: int
+  - productosSeleccionados: List<Producto>
+  + agregarProducto(producto: Producto)
+  + quitarProducto(producto: Producto)
+  + calcularTotal(): double
+}
+
+'===== CLASE PEDIDO =====
+class Pedido {
+  - idPedido: int
+  - fechaPedido: Date
+  - estado: String
+  + generarPedido()
+  + cancelarPedido()
+}
+
+'===== CLASE PAGO =====
+class Pago {
+  - idPago: int
+  - metodoPago: String
+  - montoTotal: double
+  + procesarPago()
+  + validarPago()
+}
+
+'===== RELACIONES ENTRE CLASES =====
+
+Cliente "1" --> "1" Carrito : tiene >
+Carrito "1" --> "*" Producto : contiene >
+Cliente "1" --> "*" Pedido : realiza >
+Pedido "1" --> "1" Pago : se paga con >
+Pedido "*" --> "*" Producto : incluye >
+
+@enduml
