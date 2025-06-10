@@ -1,0 +1,16 @@
+@startuml
+actor Técnico
+participant AppMantenimiento
+participant ControladorFallas
+participant ServicioAPI
+database BaseDeDatos
+
+Técnico -> AppMantenimiento: reportarFalla(equipo, descripcion)
+AppMantenimiento -> ControladorFallas: procesarReporte()
+ControladorFallas -> ServicioAPI: enviarFalla(equipo, descripcion)
+ServicioAPI -> BaseDeDatos: guardarFalla()
+BaseDeDatos --> ServicioAPI: confirmación
+ServicioAPI --> ControladorFallas: respuestaServidor
+ControladorFallas --> AppMantenimiento: notificarUsuario()
+@enduml
+
