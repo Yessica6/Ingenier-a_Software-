@@ -1,0 +1,15 @@
+@startuml
+actor Usuario
+participant Interfaz
+participant Controlador
+participant ServicioAutenticacion
+database BaseDeDatos
+
+Usuario -> Interfaz: ingresarCredenciales()
+Interfaz -> Controlador: enviarCredenciales(usuario, clave)
+Controlador -> ServicioAutenticacion: validar(usuario, clave)
+ServicioAutenticacion -> BaseDeDatos: consultarUsuario(usuario)
+BaseDeDatos --> ServicioAutenticacion: datosUsuario
+ServicioAutenticacion --> Controlador: resultadoValidacion
+Controlador --> Interfaz: mostrarResultado()
+@enduml
