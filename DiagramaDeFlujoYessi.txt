@@ -1,7 +1,7 @@
 flowchart TD
 
 %% Textos no conectados al flujo
-TX1[Diagrama de flujo]
+TX1[Diagrama de flujo Mermind]
 TX2[Ing en Sistemas Computacionales]
 TX3[Cazares Ledesma Diego]
 
